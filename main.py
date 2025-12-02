@@ -2,24 +2,12 @@ import io
 
 from fastapi import FastAPI, File, UploadFile
 from ultralytics import YOLO
-from pydantic import BaseModel
 from PIL import Image
 
 
 app = FastAPI(title="YOLO Object Detection API")
 
 model = YOLO("yolov8n.pt")
-
-
-class ImageRequest(BaseModel):
-    image_base64: str
-    confidence_threshold: float = 0.5
-    
-
-class DetectionResult(BaseModel):
-    class_name: str
-    confidence: float
-    box: list
 
 
 @app.get("/")
